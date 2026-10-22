@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expenseflow-deployment
+  labels:
+    app: expenseflow
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: expenseflow
+
+  template:
+    metadata:
+      labels:
+        app: expenseflow
+
+    spec:
+      containers:
+        - name: expenseflow
+          image: rujutaujoshi/expenseflow:latest
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 5000
+
+          env:
+            - name: DATABASE_PATH
+              value: /app/data/expenses.db
+
+          volumeMounts:
+            - name: expenseflow-data
+              mountPath: /app/data
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+
+      volumes:
+        - name: expenseflow-data
+          persistentVolumeClaim:
+            claimName: expenseflow-pvc
