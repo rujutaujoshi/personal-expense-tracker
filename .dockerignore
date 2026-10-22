@@ -1,0 +1,15 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.git/
+.github/
+.env
+.DS_Store
+expenses.db
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+screenshots/

@@ -2,7 +2,14 @@
 import sqlite3
 from pathlib import Path
 
-DATABASE = Path(__file__).resolve().parent / "expenses.db"
+import os
+
+DATABASE = Path(
+    os.environ.get(
+        "DATABASE_PATH",
+        str(Path(__file__).resolve().parent / "expenses.db")
+    )
+)
 
 
 def get_connection():
