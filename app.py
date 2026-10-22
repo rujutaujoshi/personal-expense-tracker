@@ -28,7 +28,7 @@ app.secret_key = os.environ.get(
     "local-development-secret-change-before-deployment"
 )
 
-APP_VERSION = "1.0"
+APP_VERSION = "1.1"
 
 CATEGORIES = [
     "Food",

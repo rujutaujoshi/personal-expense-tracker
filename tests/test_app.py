@@ -35,7 +35,7 @@ def test_health_endpoint(client):
 
     assert response.status_code == 200
     assert response.json["status"] == "healthy"
-    assert response.json["version"] == "1.0"
+    assert response.json["version"] == "1.1"
 
 
 def test_add_expense(client):
